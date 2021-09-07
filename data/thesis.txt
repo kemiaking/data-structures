@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <title>Parsons MS Data Visualization | 2021 Thesis Projects</title>
+
+    <!--
+    site updated on 2021/05/03
+  -->
+
+    <!-- stylesheets -->
+    <link href="./css/style.css" rel="stylesheet" />
+
+    <!-- favicons -->
+    <link rel="icon" type="image/png" href="./img/favicon_32x32.png" />
+
+    <!-- facebook tags -->
+    <meta
+      property="og:title"
+      content="Parsons MS Data Visualization | 2021 Thesis Projects"
+    />
+    <meta
+      property="og:description"
+      content=""
+    />
+    <meta
+      property="og:image"
+      content="http://parsons.nyc/thesis-2021/img/social_banner.png"
+    />
+    <meta property="og:url" content="http://parsons.nyc/thesis-2021" />
+
+    <!-- twitter tags -->
+    <meta
+      name="twitter:title"
+      content="Parsons MS Data Visualization | 2021 Thesis Projects"
+    />
+    <meta
+      name="twitter:description"
+      content=""
+    />
+    <meta
+      name="twitter:image"
+      content="http://parsons.nyc/thesis-2021/img/social_banner.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- wechat Tags -->
+    <meta
+      itemprop="name"
+      content="Parsons MS Data Visualization | 2021 Thesis Projects"
+    />
+    <meta
+      itemprop="image"
+      content="http://parsons.nyc/thesis-2021/img/social_banner.png"
+    />
+    <meta
+      name="description"
+      itemprop="description"
+      content=""
+    />
+  </head>
+
+  <body>
+    <div id="loading">
+      Loading...
+    </div>
+    <div id="app" style="display:none;">
+      <nav-bar>
+        <div class="flex items-center">
+          <div
+            id="logo"
+            class="w3 h3 flex-shrink-0 mr3 pointer dim"
+            v-on:click="window.open('https://newschool.edu')"
+            ></div>
+          <h1
+            class="f7 f5-ns neue-bold"
+            ><a
+              class="f7 f5-ns neue-bold link black"
+              href="https://parsons.nyc"
+              >{{ department }}</a
+            ></h1>
+        </div>
+
+        <div class="mr3 ml3">
+          <a
+            href="#"
+            class="dib link bg-red pv2 pl2 pr3 white br3 flex-shrink-0 f7 f5-ns"
+            v-on:click="shareModal"
+            ><svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="v-top mr1 dib" style="width:1em;height:1em;"
+              >
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 6.65685 16.3431 8 18 8Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M6 15C7.65685 15 9 13.6569 9 12C9 10.3431 7.65685 9 6 9C4.34315 9 3 10.3431 3 12C3 13.6569 4.34315 15 6 15Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M18 22C19.6569 22 21 20.6569 21 19C21 17.3431 19.6569 16 18 16C16.3431 16 15 17.3431 15 19C15 20.6569 16.3431 22 18 22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8.59003 13.51L15.42 17.49" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15.41 6.51001L8.59003 10.49" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>&nbsp;Share</a>
+        </div>
+      </nav-bar>
+
+      <div
+        class="fixed top-0 left-0 w-100 h-100 overflow-y-scroll overflow-x-hidden pt5"
+        v-on:scroll="updateScroll"
+        ref="scroll"
+        >
+
+        <div class="db dn-ns">
+          <ul class="list pt2 dib pl0 ph3 w-100 tc toggle">
+            <li
+              class="dib w-50"
+              ><a
+                href="#"
+                class="w-100 dib ba br3 br--left ma0 pv2 f6 link"
+                v-on:click="changeView"
+                ref="infobutton"
+                >Info</a
+            ></li
+            ><li
+              class="dib w-50"
+              ><a
+                  href="#"
+                  class="w-100 dib ba br3 br--right ma0 pv2 f6 active link"
+                  v-on:click="changeView"
+                  ref="projectbutton"
+              >Projects</a
+            ></li>
+          </ul>
+        </div>
+
+        <div class="w-100 mw8 mr-auto ml-auto flex-ns">
+          <!-- LEFT -->
+          <div
+            class="top-0 pt3 ph3 w-100 w-third-ns mw6 flex-shrink-0 dn db-ns"
+            ref="infobar"
+            >
+            <div class="flex-grow-0 pb6" ref="sticky" style="position: -webkit-sticky;position: sticky;">
+              <!-- ABOUT -->
+              <h2
+                class="mt1 f7 neue-bold ttu black"
+                >About</h2>
+              <p
+                class="mb2 mt2 design-black">
+                This interdisciplinary graduate program brings together design, statistics, and computer science, developing critical abilities and facility for innovation in work settings in which data increasingly shapes opinion, policy, and decision-making.
+              </p>
+              <!-- <p class="mt0">
+                <a
+                  class="red"
+                  href="https://www.metmuseum.org/blogs/collection-insights/2020/met-api-parsons-data-visualization"
+                  >Learn More &rarr;</a
+                >
+              </p> -->
+
+              <!-- <h2
+                class="mt4 f7 neue-bold ttu black"
+                >Previous Years</h2>
+              <ul class="list pl0 dib mb0 mt1">
+                <li
+                  class="dib neue-bold"
+                  ><a
+                    class="design-black link hover-gray"
+                    href="https://parsons.nyc/met-museum-2018"
+                    >2018</a></li>
+              </ul> -->
+
+              <!-- STUDENTS -->
+              <h2
+                class="mt4 f7 neue-bold ttu black"
+                >Graduates</h2>
+              <p class="mb2 mt2 design-black">
+                <ul class="list pl0">
+                  <li v-for="({name,url}) in students">
+                    <a class="link design-black hover-red" :href="url">{{ name }}</a>
+                  </li>
+                </ul>
+              </p>
+
+              <!-- <h2
+                class="mt4 f7 neue-bold ttu black measure-narrow"
+                >The Metropolitan Museum of Art Open Access</h2>
+              <p class="mb2 mt2 design-black">
+                <ul class="list pl0 design-black">
+                  <li>Jennie Choi</li>
+                  <li>Loic Tallon</li>
+                </ul>
+                <a
+                  class="red"
+                  href="https://www.metmuseum.org/about-the-met/policies-and-documents/image-resources"
+                  >Learn More &rarr;</a>
+              </p> -->
+
+              <h2
+                class="mt4 f7 neue-bold ttu black"
+                >Parsons School of Design</h2>
+              <p class="mb2 mt2 design-black">
+                <ul class="list pl0 design-black padding">
+                  <li>
+                    <a
+                      class="gray hover-red"
+                      href="http://www.newschool.edu/parsons/ms-data-visualization/"
+                      >MS Data Visualization</a>
+                  </li>
+                  <li>
+                    <a
+                      class="gray hover-red"
+                      href="http://www.newschool.edu/parsons/art-media-technology-school-amt/"
+                      >School of Art, Media, and Technology</a>
+                  </li>
+                  <li>
+                    <a
+                      class="gray hover-red"
+                      href="http://danielsauter.com/gallery.php"
+                      >Daniel Sauter</a>, Associate Professor of Data Visualization
+                  </li>
+                  <li>
+                    Alec Barrett, Part-Time Faculty
+                  </li>
+                  <li>
+                    Sohee Cho, Teaching Assistant
+                  </li>
+                </ul>
+              </p>
+
+              <h2
+                class="mt4 f7 neue-bold ttu black"
+                >Connect</h2>
+              <p class="mb2 mt2 design-black">
+                <ul class="list di pl1">
+                  <li class="dib">
+                    <a
+                      class="link"
+                      href="https://github.com/visualizedata/"
+                      ><img
+                        src="./img/GitHub.png"
+                        style="width:2.5rem"
+                      ></a>
+                  </li>
+                </ul>
+              </p>
+            </div>
+          </div>
+
+          <!-- RIGHT -->
+          <div
+            class="pt3 ph3 flex-grow-1 db-ns"
+            ref="projectbar"
+            >
+            <div class="mt1 mb3">
+              <h1
+                class="f3 red mb0 mt0 mb4 neue-bold"
+                >{{ page_title }}</h1>
+            </div>
+
+            <div>
+              <project-item
+                v-for="({
+                  title,
+                  subtitle,
+                  description,
+                  url,
+                  author,
+                  image,
+                  repository,
+                  video
+                }) in projects"
+
+                :title="title"
+                :subtitle="subtitle"
+                :description="description"
+                :url="url"
+                :author="author"
+                :image="image"
+                :author_url="getLink(url)"
+                :repository="repository"
+                :video="video"
+              ></project-item>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SHARE MODAL -->
+      <share-modal v-if="shareModalVisible">
+        <a
+          class="db link mb2 color-fb hover-black"
+          :href='"https://www.facebook.com/sharer/sharer.php?u=" + site_url'
+          >Facebook</a>
+        <a
+          class="db link mb2 color-twitter hover-black"
+          :href='"https://twitter.com/intent/tweet?text=" + site_url'
+          >Twitter</a>
+        <a
+          class="db link mb2 color-linkedin hover-black"
+          :href='"https://www.linkedin.com/shareArticle?mini=true&url=" + site_url'
+          >LinkedIn</a>
+        <a
+          class="db link mb2 color-weibo hover-black"
+          :href='"http://service.weibo.com/share/share.php?url=" + site_url + "&title=" + site_url '
+          >Weibo</a>
+        <input
+          :value="site_url"
+          class="w-100 f6 gray"
+          ref="copy_link_input"
+        />
+        <a
+          href="#"
+          v-on:click="copyLink"
+          class="db link mb3 mt1 f5 gray hover-black pointer"
+          >{{ copy_text }}</a>
+        <a
+          class="gray hover-red f5 dib"
+          href="#"
+          v-on:click="shareModal"
+          >Nevermind</a>
+      </share-modal>
+
+      <div
+        class="fixed bottom-0 right-0 z-999 pa3"
+        :style="{
+          opacity: scrollY > 100 ? '1.0' : '0.0',
+          transition: '0.3s ease all'
+        }"
+      >
+        <a
+          href="#"
+          class="f5 dib bg-white br3 pa2 shadow-2 link gray hover-bg-red hover-white"
+          v-on:click="scrollToTop"
+          ref="scrollToTopButton"
+        >Top</a>
+      </div>
+    </div>
+
+    <video controls autoplay id="videoPlayer">
+      <source id="localSource" src=""></source>
+      <source id="videoSource" src=""></source>
+    </video>
+
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/components/nav-bar.js"></script>
+    <script src="./js/components/project-item.js"></script>
+    <script src="./js/components/share-modal.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
