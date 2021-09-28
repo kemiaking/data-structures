@@ -1,0 +1,20 @@
+WEEK 4 ASSIGNMENT 
+
+This weeks assingment was to create a data model for the data we have from the last few weeks.
+
+When creating my data model, I had to think about how I wanted to sort out what information I had. There are two different ways data model types: Normalized and Denormalized. 
+Normalized Data Models groups related data together for more concise/ less redundant data tables. This often leads to more tables. This maintains accuracy and is easier for recall later.
+Denormalized Data Models is basically the opposite of Normalized. It joins together the tables in normalized models , which leads to a decrease accuracy but fewer tables to work through. 
+
+For my data model, I first figured out which data I wanted do to include in my tables. From there I sorted them how i naturally saw fit. 
+
+<img width="931" alt="Screen Shot 2021-09-28 at 6 03 20 PM" src="https://user-images.githubusercontent.com/87023658/135171949-26570f95-3234-4e52-b04b-3e068e8f60fa.png">
+
+
+From there I created my tables based on how I sorted them out on my page.
+
+<img width="503" alt="Screen Shot 2021-09-28 at 5 42 39 PM" src="https://user-images.githubusercontent.com/87023658/135172017-1fa3384f-d0b0-47c5-b6cf-14a88d17ff16.png">
+
+There is a lot of data from the original website that I figured would be relevant for the tables. I ended up using a Normalized Data Model, because many of the tables in the original website had lots of overlap. Many of the same meeting hosts hosted different meeting types and names and even had multiple addresses. I normalized the data and separated them into basically into their own tables. My initial approach was to use as little tables as I could, but the way the data is, it wasn't the most feasible for me. 
+
+In my Excel file, each table is in its own sheet. Each Meeting Host and Name would have their own address, latitude/longitude, meeting type(s), day(s) of the week, and time(s).
